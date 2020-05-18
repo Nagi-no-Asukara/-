@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: index
+  datasource:
+    url: jdbc:mysql://localhost:3306/pixiv?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
+    username: root
+    password: a474711475
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+server:
+  port: 8087
+
+
+fdfs:
+  soTimeout: 1500
+  connectTimeout: 600
+  tracker-list: 192.168.30.129:22122
+  thumb-image:             #缩略图生成参数
+    width: 150
+    height: 150

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pixiv.index.dao.mapper.ContentMapper" >
+    <resultMap id="ImageMap" type="com.pixiv.index.entity.Content" >
+        <id column="id" property="id" />
+        <result column="redirect" property="redirect"  />
+        <result column="title" property="title" />
+        <result column="src" property="src"  />
+    </resultMap>
+
+    <select id="getRecommendImageList" resultType="com.pixiv.index.entity.Image">
+        select i.* from image i
+        inner join recommend_image ri on ri.image_id=i.id
+    </select>
+
+
+</mapper>

@@ -1,0 +1,23 @@
+spring:
+  #activemq:
+   # user: admin
+    #password: admin
+    #broker-url: tcp://192.168.30.129:61616
+    #in-memory: false
+    #pool:
+     # enabled: true
+      #max-connections: 50
+    #packages:
+     # trust-all: true
+  #jms:
+   # pub-sub-domain: false
+  application:
+    name: userspace
+  datasource:
+      url: jdbc:mysql://localhost:3306/pixiv?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
+      username: root
+      password: a474711475
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8086

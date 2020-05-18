@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pixiv.authority.mapper.PermissionMapper">
+
+
+
+    <select id="selectById" resultType="com.pixiv.authority.entity.Permission">
+		select id,name from news where pid = #{xxx}
+	</select>
+
+
+    <!-- 查询指定id栏目 及 下面的所有子孙菜单 -->
+    <select id="selectChildrenRoute" parameterType="String" resultType="com.pixiv.authority.entity.Permission">
+		select id,name,pid,en_visible,code from Permission where pid=#{id} and type=1
+	</select>
+
+	<!--通过router查询meanu
+	<select id="selectMeanByRouter" parameterType="String" resultType="com.pixiv.authority.entity.Permission">
+		select id,name,pid,en_visible,code from Permission where pid=#{id} and type=1
+	</select>
+-->
+
+
+</mapper>

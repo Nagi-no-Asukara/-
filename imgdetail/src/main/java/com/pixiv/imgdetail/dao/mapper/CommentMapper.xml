@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pixiv.imgdetail.dao.mapper.CommentMapper" >
+    <resultMap id="CommentMap" type="com.pixiv.imgdetail.entity.Comment" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="admin_id" property="adminId"  />
+        <result column="image_id" property="imageId"  />
+        <result column="parent_id" property="parentId"  />
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime" />
+        <result column="is_hide" property="isHide" />
+        <association property="user"  javaType="com.pixiv.imgdetail.entity.UserInfo">
+            <id property="id" column="uid" />
+            <result property="name" column="name" />
+            <result property="avatar" column="avatar" />
+        </association>
+    </resultMap>
+
+    <resultMap id="ReplyMap" type="com.pixiv.imgdetail.entity.Reply" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="admin_id" property="adminId"  />
+        <result column="parent_id" property="parentId"  />
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime" />
+        <result column="is_hide" property="isHide" />
+        <association property="user"  javaType="com.pixiv.imgdetail.entity.UserInfo">
+            <id property="id" column="uid" />
+            <result property="name" column="name" />
+            <result property="avatar" column="avatar" />
+        </association>
+
+    </resultMap>
+
+    <resultMap id="userMap" type="com.pixiv.imgdetail.entity.UserInfo">
+        <id property="id" column="uid"/>
+        <result property="name" column="name"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+
+
+    <select id="getCommentByImageId" resultMap="CommentMap">
+    select c.*,u.id as uid,u.name,u.avatar
+    from comment c
+    inner join user_info u on u.id = c.admin_id
+    where image_id = #{imageId}
+    </select>
+
+    <select id="getReplyByCommentId" resultMap="ReplyMap">
+    select r.*,u.id as uid,u.name,u.avatar
+    from reply r
+    inner join user_info u on u.id = r.admin_id
+    where parent_id = #{ParentId}
+    </select>
+
+
+</mapper>

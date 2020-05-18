@@ -1,0 +1,51 @@
+server:
+  port: 8091
+
+spring:
+    application:
+      name: cloud-gateway
+    cloud:
+      gateway:
+        #discovery:
+          #locator:
+           # enabled: true   #开启动态创建路由的功能
+       routes:
+          - id: app3-route
+            uri: http://www.baidu.com
+            predicates:
+              - Path=/test
+            filters:
+              - StripPrefix=1
+
+          - id: app1-route
+            uri: http://localhost:8079
+            predicates:
+                - Path=/user/**
+            filters:
+                - StripPrefix=0
+
+          - id: app2-route
+            uri: http://localhost:8080
+            predicates:
+                - Path=/manage/**
+            filters:
+                - StripPrefix=0
+
+
+
+
+jwt:
+  key: Miuna
+  ttl: 10800000
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://${eureka.instance.hostname}:8090/eureka/
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pixiv.userspace.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.pixiv.userspace.entity.UserInfo" >
+    <id column="id" property="id"  />
+    <result column="name" property="name"  />
+    <result column="avatar" property="avatar"  />
+    <result column="sex" property="sex"  />
+  </resultMap>
+
+  <select id="getFavList" parameterType="Integer" resultType="com.pixiv.userspace.entity.Image">
+    SELECT i.* from image i
+    left outer join user_loved ul on ul.image_id=i.id
+    left outer join user_info u on ul.user_id=u.id
+    where u.id=#{id}
+  </select>
+
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pixiv.imgdetail.dao.mapper.ImageMapper" >
+  <resultMap id="ImageMap" type="com.pixiv.imgdetail.entity.Image" >
+    <id column="id" property="id"  />
+    <result column="title" property="title"  />
+    <result column="url" property="url"  />
+    <result column="author" property="author"  />
+    <result column="created" property="created"  />
+    <result column="loved" property="loved"  />
+  </resultMap>
+
+  <insert id="AddLoved" >
+    insert into user_loved(user_id,image_id) values (#{userId},#{imageId})
+  </insert>
+
+  <insert id="DeleteLoved" >
+    delete from user_loved where user_id=#{userId} and image_id=#{imageId}
+  </insert>
+
+  <select id="getLovedImageListById" resultType="com.pixiv.imgdetail.entity.Image">
+    SELECT i.* from image i
+    left outer join user_loved ul on i.id=ul.image_id
+    left outer join user_info u on u.id=ul.user_id
+    where u.id=#{userId}
+  </select>
+
+</mapper>
