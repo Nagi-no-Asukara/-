@@ -35,7 +35,7 @@
 
         <spring-security>2.2.4.RELEASE</spring-security>
         <jwt>3.9.0</jwt>
-        <shiro>1.4.1</shiro>
+        <shiro>1.5.3</shiro>
         <shiro-redis>3.1.0</shiro-redis>
 
         <spring-activemq>2.2.3.RELEASE</spring-activemq>
